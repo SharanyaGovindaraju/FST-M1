@@ -1,13 +1,17 @@
 package activities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 public class Activity1 {
 	// Test fixtures
-	static ArrayList<String> list;
+	ArrayList<String> list;
 
 	// Initialize test fixtures before each test method
 
@@ -22,23 +26,24 @@ public class Activity1 {
 
 	@Test
 	public void insertTest() {
+		
+		List<String> expectedList= Arrays.asList("alpha", "beta", "gamma");
 
 		// Assertion for size
-		assertEquals(2, list.size(), "Wrong size");
+		assertEquals(2, list.size());
 
 		// Add new element
 
-		list.add(2, "charlie");
+		list.add(2, "gamma");
 
 		// Assert with new elements
 
-		assertEquals(3, list.size(), "Wrong size");
+		assertEquals(3, list.size());
 
 		// Assert individual elements
 
-		assertEquals("alpha", list.get(0), "Wrong element");
-		assertEquals("beta", list.get(1), "Wrong element");
-		assertEquals("charlie", list.get(2), "Wrong element");
+		assertIterableEquals(expectedList, list);
+		
 
 	}
 
@@ -46,19 +51,24 @@ public class Activity1 {
 
 	@Test
 	public void replaceTest() {
+		List<String> expectedList= Arrays.asList("alpha", "beta", "Charlie");
 
-		// Replace new element
+		// Assertion for size
+		assertEquals(2, list.size());
 
-		list.set(1, "charlie");
+		// Add new element
 
-		// Assert size of list
+		list.add(2, "gamma");
+		list.set(2, "Charlie");
 
-		assertEquals(2, list.size(), "Wrong size");
+		// Assert with new elements
+
+		assertEquals(3, list.size());
 
 		// Assert individual elements
 
-		assertEquals("alpha", list.get(0), "Wrong element");
-		assertEquals("charlie", list.get(1), "Wrong element");
+		assertIterableEquals(expectedList, list);
+		
 
 	}
 
