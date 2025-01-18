@@ -1,14 +1,15 @@
-# Getting colors
-# Goal: Get the color of the navigation menu
+# Traversing tables
+# Goal: Open the accounts page and print the contents of the table.
+
 
 # Import webdriver from selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.color import Color
+import time
 
 # Start the Driver
 with webdriver.Chrome() as driver:
-
+  
     driver.get("https://alchemy.hguy.co/crm/")
 
 # Find and select the username and password fields
@@ -23,10 +24,23 @@ with webdriver.Chrome() as driver:
     else:
         print("Login failed !")
 
-# Get the color of the navigation menu and print it to the console.
-    nav_menu_color = Color.from_string(driver.find_element(By.ID, "toolbar").value_of_css_property("color"))
-    print("Navigation Menu colour as Hexcode: ", nav_menu_color.hex)
-    print("Navigation Menu colour as RGB: ", nav_menu_color.rgb)
+# Navigate to the Sales -> Accounts page
+    driver.fullscreen_window()
+    driver.find_element(By.ID,"grouptab_0").click()
+    driver.find_element(By.ID,"moduleTab_9_Accounts").click()
+    time.sleep(2)
+# Find the table on the page and print the names of the first 5 odd-numbered rows of the table to the console
+    print("The first 5 Odd-numbered names are : ")
+    namesList = driver.find_elements(By.XPATH,"//table[@class='list view table-responsive']/tbody/tr/td[3]")
+    for x in range(1, 10, 2):
+        print(x,namesList[x].text)
 
-# Close the browser
+#Close the browser
     driver.quit()
+    
+
+
+
+
+
+    

@@ -1,34 +1,32 @@
+# Menu checking
+# Goal: Make sure that the “Activities” menu item exists and is clickable
+
 # Import webdriver from selenium
-from ast import Assert
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 # Start the Driver
 with webdriver.Chrome() as driver:
-    # Navigate to the URL
-    driver.get("http://alchemy.hguy.co/crm")
-   
 
-    # Find the username field
-    username = driver.find_element(By.XPATH, "//input[@id='user_name']")
-    # Find the password field
-    password = driver.find_element(By.XPATH, "//input[@id='username_password']")
+    driver.get("https://alchemy.hguy.co/crm/")
 
-    # Enter the given credentials
-    # Enter username
-    username.send_keys("admin")
-    # Enter password
-    password.send_keys("pa$$w0rd")
+# Find and select the username and password fields
+# Enter login credentials into the respective fields
+    driver.find_element(By.ID,"user_name").send_keys("admin")
+    driver.find_element(By.ID,"username_password").send_keys("pa$$w0rd")
+    driver.find_element(By.ID,"bigbutton").click()
+    homePageHeader = driver.find_element(By.ID,"tab0").text
+    # print(homePageHeader)
+    if(homePageHeader=="SUITECRM DASHBOARD"):
+        print("Home Page Opened Successfully !")
+    else:
+        print("Login failed !")
 
-    # Find the login button
-    login = driver.find_element(By.XPATH, "//input[@type='submit']")
-    login.click()
-    #Ensure that the “Activities” menu item exists
-    driver.maximize_window()
-    time.sleep(5)
-    activitiesMenu = driver.find_element(By.ID, "grouptab_3").text
-    print("The Menu has :" + activitiesMenu)
-    Assert(activitiesMenu, "ACTIVITIES")
+# Locate the navigation menu.
+# Ensure that the “Activities” menu item exists
+    driver.fullscreen_window()
+    activitiesMenu = driver.find_element(By.ID, "grouptab_3")
+    print("Activities Menu is visible? ", activitiesMenu.is_displayed())
 
-   
+# Close the browser
+    driver.quit()
