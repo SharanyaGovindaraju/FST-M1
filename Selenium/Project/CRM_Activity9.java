@@ -83,7 +83,7 @@ public class CRM_Activity9 {
 				List<WebElement> users =driver.findElements(By.xpath("//table[@class='list view table-responsive']/tbody/tr/td[8]"));
 				List<String> actualLeadsNames = new ArrayList<String>();
 				List<String> actualLeadsUsers = new ArrayList<String>();
-				for(int i=1;i<11;i++) {
+				for(int i=1;i<10;i++) {
 					actualLeadsNames.add(names.get(i).getText());
 					actualLeadsUsers.add(users.get(i).getText());
 				}
